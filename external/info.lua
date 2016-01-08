@@ -31,11 +31,13 @@ _G.tFunction = {
 
 	Execute = function( sQuery )
 		local luasql = luasql or require "luasql.mysql"
-		if not ( SQLEnv and SQLCon ) then
+		local bSuccess, SQLCur = pcall( SQLCon.execute, SQLCon, sQuery )
+		if not bSuccess then
 			_G.SQLEnv = assert( luasql.mysql() )
 			_G.SQLCon = assert( SQLEnv:connect(Connection 'latest') )
+			SQLCur = assert( SQLCon:execute(sQuery) )
 		end
-		return assert( SQLCon:execute(sQuery) )
+		return SQLCur
 	end,
 
 	Report = ( function()
