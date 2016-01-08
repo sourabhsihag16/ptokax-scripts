@@ -1,3 +1,8 @@
+2016-01-08
+----------
+
+- Provide a `-m` flag for the `addto` command to send notices to mainchat.
+
 2015-05-03
 ----------
 
