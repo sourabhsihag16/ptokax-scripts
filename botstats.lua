@@ -27,7 +27,7 @@ function OnStartup()
 	package.path = tPaths.sDepPath.."?.lua;"..package.path
 	local Connection = require 'config'
 	tHelp, tToksConfig = {}, {
-		iMinShareLimit = 64,
+		iMinShareLimit = 90,
 		fInflationConstant=0.99,
 		fRegUserAllowanceFactor=0.005,
 		fModAllowance=200,
