@@ -85,6 +85,7 @@ function ChatArrival( tUser, sMessage )
 		return false
 	end
 	local tBreak, Result, sError = Explode( sData ), nil, nil
+
 	if not tBreak[1] then
 		Core.SendToUser( tUser, tConfig.sAsBot.."No argument passed." )
 		return false
@@ -105,12 +106,25 @@ function ChatArrival( tUser, sMessage )
 			Core.SendToUser( tUser, tConfig.sAsBot.."No message was provided." )
 			return false
 		end
+
+    	local bSendToAll = false
+		if tBreak[#tBreak] == "-m" then
+			bSendToAll = true
+			table.remove( tBreak, #tBreak )
+		end
+
+		local sMsg = table.concat( tBreak, " ", 2 )
+
 		if tBreak[1] == "lnf" or tBreak[1] == "lostnfound" then
-			Result, sError = StoreMessage( "lostnfound", table.concat(tBreak, " ", 2) )
+			Result, sError = StoreMessage( "lostnfound", sMsg )
 		elseif tBreak[1] == "notice" or tBreak[1] == "notices" then
-			Result, sError = StoreMessage( "notices", table.concat(tBreak, " ", 2) )
+			Result, sError = StoreMessage( "notices", sMsg )
 		elseif tBreak[1] == "tnp" then
-			Result, sError = StoreMessage( "trainplace", table.concat(tBreak, " ", 2) )
+			Result, sError = StoreMessage( "trainplace", sMsg )
+		end
+
+		if bSendToAll and Result then
+			Core.SendToAll( tConfig.sAsBot..sMsg )
 		end
 
 	elseif sCommand == "removefrom" then
