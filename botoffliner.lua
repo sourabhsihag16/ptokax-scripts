@@ -32,7 +32,7 @@ function OnStartup()
 			[1] = true,			-- God
 			[2] = true,			-- OP
 			[3] = true,			-- VIP
-			[4] = false,		-- Mods
+			[4] = true,		-- Mods
 			[5] = false,		-- Reg
 			[6] = false,		-- sVIP
 			[7] = false,		-- gymkhana
